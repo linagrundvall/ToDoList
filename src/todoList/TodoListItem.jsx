@@ -30,12 +30,18 @@ import React from "react";
 
 /* Todo-objekt*/
 const TodoListItem = (props) => {
+    const {todo, isSelected} = props;
+    let className = "todo-list-item";
+    if (isSelected){
+      className += " todo-list-item--selected";
+    }
+
     return (
-        <li className="todo-list-item">
+        <li className={className}>
           <span className="todo-list-item__checkbox"></span>
           <div className="todo-list-item__info">
-            <h3>Todo</h3>
-            <p>Ham, sandwich, cheese</p>
+            <h3>{todo.title}</h3>
+            <p>{todo.description}</p>
           </div>
         </li>
     );

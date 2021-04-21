@@ -3,10 +3,11 @@ import React from "react";
 /* <!--Visningsläge för todo--> */
 
 const TodoDetails = (props) => {
+    const {todo} =props;
     return (
         <div className="todo-details">
-          <h2>Todo title</h2>
-          <p>Todo description</p>
+          <h2>{todo.title}</h2>
+          <p>{todo.description}</p>
           <p className="todo-details__date">Created Date</p>
           <p className="todo-details__date">Updated date</p>
           <button type="button" className="link-button danger">Delete</button>
