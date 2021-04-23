@@ -4,7 +4,7 @@ import React from "react";
 
 
 const EditTodoForm = (props) => {
-  const {todo} = props;
+  const {todo, onCancel, onSave} = props;
 
     return (
         <form id="todo-form">
@@ -13,8 +13,8 @@ const EditTodoForm = (props) => {
           <input name="title" required value={todo.title} />
           <label>Description</label>
           <textarea name="description" value={todo.description} rows="3"></textarea><br />
-          <button type="button" className="link-button">Cancel</button>
-          <button type="button" className="primary">Save</button>
+          <button type="button" className="link-button" onClick={onCancel}>Cancel</button>
+          <button type="button" className="primary" onClick={onSave}>Save</button>
         </form>
     );
 }

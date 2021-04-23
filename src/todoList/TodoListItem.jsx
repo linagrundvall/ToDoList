@@ -30,14 +30,20 @@ import React from "react";
 
 /* Todo-objekt*/
 const TodoListItem = (props) => {
-    const {todo, isSelected} = props;
+    const {todo, isSelected, onClick} = props;
     let className = "todo-list-item";
     if (isSelected){
       className += " todo-list-item--selected";
     }
 
+    const handleClick = () => {
+      if(onClick) {
+        onClick(todo);
+      }
+    }
+
     return (
-        <li className={className}>
+        <li className={className} onClick={handleClick}>
           <span className="todo-list-item__checkbox"></span>
           <div className="todo-list-item__info">
             <h3>{todo.title}</h3>
