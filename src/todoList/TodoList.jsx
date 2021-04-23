@@ -2,7 +2,7 @@ import React from "react";
 import TodoListItem from "./TodoListItem";
 
 const TodoList = (props) => {
-  const {todo, selectedTodoId} = props;
+  const {todo, selectedTodo} = props;
   
   const handleTodoClicked = (todo) => {
     if (props.onTodoSelected) {
@@ -12,7 +12,10 @@ const TodoList = (props) => {
     return (
     <ul className="todo-list">
       {todo.map(todo => (
-      <TodoListItem onClick={handleTodoClicked} key={todo.id} todo={todo} isSelected={todo.id === selectedTodoId} />
+      <TodoListItem 
+        onClick={handleTodoClicked} 
+        key={todo.id} todo={todo} 
+        isSelected={todo === selectedTodo} />
       ))}
     </ul>
     );
