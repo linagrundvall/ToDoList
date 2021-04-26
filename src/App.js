@@ -4,7 +4,7 @@ import TodoList from './todoList/TodoList';
 import TodoDetails from './todoDetails/TodoDetails';
 import CreateTodoForm from './todoDetails/CreateTodoForm';
 import EditTodoForm from './todoDetails/EditTodoForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const viewModes = {
   view: "View",
@@ -31,6 +31,11 @@ const handleTodoSave = (newTodo) => {
   setTodo(newArray);
   selectTodo(newTodo);
 };
+
+//Körs vid start, med tom beroendelista körs den bara en gång
+useEffect(() => {
+  console.log("In useEffect");
+}, []);
 
 const renderMainSection = () => {
   switch(viewMode) {
