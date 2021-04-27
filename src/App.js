@@ -41,6 +41,19 @@ function App() {
     selectTodo(newTodo);
   };
 
+  const handleTodoUpdate = (updatedTodo) => {
+    const newArray = todo.slice();
+    for(var i = 0; i < newArray.length; i++){
+      if(newArray[i].id === updatedTodo.id){
+        newArray[i] = updatedTodo;
+        break;
+      }
+    }
+    setTodo(newArray);
+    //markerar den uppdaterade todon
+    selectTodo(updatedTodo);
+  }
+
   const handleTodoDeleted = (deletedTodo) => {
     //uppdaterar listan. filtrerar ut och visar alla todos förutom den todo som idmatchar den som tagits bort
     setTodo(todo.filter(todo => todo.id !== deletedTodo.id));
@@ -85,7 +98,7 @@ function App() {
           <EditTodoForm
             todo={selectedTodo}
             onCancel={() => setViewMode(viewModes.view)}
-            onSave={() => setViewMode(viewModes.view)} />
+            onSave={handleTodoUpdate} />
         );
       default:
         return null;

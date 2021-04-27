@@ -37,12 +37,33 @@ const todoService = {
     }
     else {
       console.log("Create failed");
-
     }
     /* throw new Error({
       status: response.status,
       statusText: response.statusText
     }); */
+  },
+
+  updateTodo: async (id, updatedTodo) => {
+    const response = await fetch(`${baseUrl}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedTodo),
+      });
+      if(response.ok){
+        //Om vi får ok så gör vi om response till json och returnerar resultatet
+        const result = await response.json();
+        return result;
+      }
+      else {
+        console.log("Create failed");
+      }
+      /* throw new Error({
+        status: response.status,
+        statusText: response.statusText
+      }); */
   },
 
   deleteTodo: async (id) => {
@@ -54,7 +75,6 @@ const todoService = {
     }
     else {
       console.log("Create failed");
-
     }
     /* throw new Error({
       status: response.status,
