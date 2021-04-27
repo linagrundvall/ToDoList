@@ -7,17 +7,63 @@ const todoService = {
     const response = await fetch(baseUrl);
     //Om response är ok så omvandlar vi till json och sparar i result-variabel som vi returnerar
     if(response.ok){
-      //Om vi får ok så gör vi om response till json
+      //Om vi får ok så gör vi om response till json och returnerar resultatet
+      const result = await response.json();
+      console.log("Glass");
+      return result;
+    }
+    else {
+      console.log("Get failed");
+    }
+    //Annars kastar vi ett fel
+    /* throw new Error({
+        status: response.status,
+        statusText: response.statusText
+    }); */
+  },
+
+  createTodo: async (newTodo) => {
+    const response = await fetch(baseUrl, {
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTodo),
+    });
+    if(response.ok){
+      //Om vi får ok så gör vi om response till json och returnerar resultatet
       const result = await response.json();
       return result;
     }
-    //Annars kastar vi ett fel
-    throw new Error({
-        status: response.status,
-        statusText: response.statusText
-    });
-  }
-}
+    else {
+      console.log("Create failed");
+
+    }
+    /* throw new Error({
+      status: response.status,
+      statusText: response.statusText
+    }); */
+  },
+
+  deleteTodo: async (id) => {
+    const response = await fetch(`${baseUrl}/${id}`, {method: "DELETE"});
+    if(response.ok){
+      //Om vi får ok så gör vi om response till json och returnerar resultatet
+      const result = await response.json();
+      return result;
+    }
+    else {
+      console.log("Create failed");
+
+    }
+    /* throw new Error({
+      status: response.status,
+      statusText: response.statusText
+    }); */
+  },
+
+
+};
 
 
 export default todoService; 
