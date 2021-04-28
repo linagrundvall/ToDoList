@@ -8,6 +8,7 @@ const CreateTodoForm = (props) => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  //const [created, setCreated] = useState("");
   const isValid = title !== "";
 
   const handleSave = async () => {
@@ -16,6 +17,7 @@ const CreateTodoForm = (props) => {
       const newTodo = {
         title: title,
         description: description,
+        //created: created,
       };
       //det vi får tillbaka från api:et
       const createdTodo = await todoService.createTodo(newTodo);

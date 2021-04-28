@@ -9,6 +9,8 @@ const EditTodoForm = (props) => {
   //statevariabler för att hantera förändringar. Tar emot en todo som den ska utgå ifrån
   const [title, setTitle] = useState(todo.title);
   const [description, setDescription] = useState(todo.description);
+  const [updated, setUpdated] = useState(todo.updated);
+  //const [completed, setCompleted] = useState(todo.completed);
   const isValid = title !== "" /* && description !== "" */;
 
   const handleSave = async () => {
@@ -17,8 +19,10 @@ const EditTodoForm = (props) => {
         title: title, 
         description: description,
       // Om jag lägger till något här så kommer det finnas med i den uppdaterade todon
-      //updated: updated,
+        updated: updated,
+        //completed: completed,
       };
+
       const updatedTodo = await todoService.updateTodo(todo.id, updatedTodoInfo);
       onSave(updatedTodo);
     }

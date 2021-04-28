@@ -6,9 +6,23 @@ import todoService from "../api/todoApiService";
 const TodoDetails = (props) => {
   const {todo, onEdit, onDelete} =props;
 
-  const myDate = new Date(todo.created);
-  const createdDate = myDate.toLocaleString();
+  
 
+  const isUpdatedDate = todo.update !== "";
+
+  
+  const myDate = new Date(todo.created);
+  const newDate = myDate.toLocaleString();
+    
+  const yourDate = new Date(todo.updated);
+  const updatedDate = yourDate.toLocaleString();
+    
+  if (!isUpdatedDate) {
+    updatedDate = "";
+  }
+    
+
+  
 
   const handleDelete = async () => {
     //Stoppar koden tills du tryckt, synkront
@@ -24,8 +38,8 @@ const TodoDetails = (props) => {
         <div className="todo-details">
           <h2>{todo.title}</h2>
           <p>{todo.description}</p>
-          <p className="todo-details__date">Created: {createdDate}</p>
-          <p className="todo-details__date">Updated: </p>
+          <p className="todo-details__date">Created: {newDate}</p>
+          <p className="todo-details__date">Updated: {updatedDate}</p>
           <button type="button" 
             className="link-button danger" 
             onClick={handleDelete}>Delete</button>
