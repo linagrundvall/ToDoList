@@ -17,7 +17,7 @@ const EditTodoForm = (props) => {
         title: title, 
         description: description,
       // Om jag lägger till något här så kommer det finnas med i den uppdaterade todon
-      //hej: hej,
+      //updated: updated,
       };
       const updatedTodo = await todoService.updateTodo(todo.id, updatedTodoInfo);
       onSave(updatedTodo);

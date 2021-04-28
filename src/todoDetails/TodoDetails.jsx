@@ -4,7 +4,11 @@ import todoService from "../api/todoApiService";
 /* <!--Visningsläge för todo--> */
 
 const TodoDetails = (props) => {
-    const {todo, onEdit, onDelete} =props;
+  const {todo, onEdit, onDelete} =props;
+
+  const myDate = new Date(todo.created);
+  const createdDate = myDate.toLocaleString();
+
 
   const handleDelete = async () => {
     //Stoppar koden tills du tryckt, synkront
@@ -20,8 +24,8 @@ const TodoDetails = (props) => {
         <div className="todo-details">
           <h2>{todo.title}</h2>
           <p>{todo.description}</p>
-          <p className="todo-details__date">Created Date</p>
-          <p className="todo-details__date">Updated date</p>
+          <p className="todo-details__date">Created: {createdDate}</p>
+          <p className="todo-details__date">Updated: </p>
           <button type="button" 
             className="link-button danger" 
             onClick={handleDelete}>Delete</button>
