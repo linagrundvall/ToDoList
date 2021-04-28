@@ -8,7 +8,9 @@ import React from "react";
   <p>Ham, sandwich, cheese</p>
 </div>
 </li>
-{/* <!--Todo-objekt, slutfört--> }
+{*/
+  
+/*   //<!--Todo-objekt, slutfört--> }
 <li className="todo-list-item todo-list-item--completed">
 <span className="todo-list-item__checkbox todo-list-item__checkbox--completed">
   <svg
@@ -26,6 +28,8 @@ import React from "react";
   <p>Ham, sandwich, cheese</p>
 </div>
 </li> */
+
+
 
 
 /* Todo-objekt*/
