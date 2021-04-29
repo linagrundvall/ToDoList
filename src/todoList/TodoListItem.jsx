@@ -34,22 +34,44 @@ import React from "react";
 
 /* Todo-objekt*/
 const TodoListItem = (props) => {
-    const {todo, isSelected, onClick} = props;
+    //destructering på propsvariabeln, plockar ut från props
+
+    const {todo, isSelected, isCompleted, onClick, onChange} = props;
+    
+    //let för att värdet kan ändras. 
     let className = "todo-list-item";
+    //om den är markerad får den ett till klassnamn
     if (isSelected){
       className += " todo-list-item--selected";
     }
+      
+    //om den är completed får den ett till klassnamn
+    if (isCompleted) {
+      className += " todo-list-item--completed";
+    }
 
+    //hanterare. hantera onClick från todolist.
+    //om onClick finns så anropar vi onClick, tar emot todo
     const handleClick = () => {
       if(onClick) {
         onClick(todo);
       }
     }
 
+    const handleChange = () => {
+      if(onChange) {
+        onChange(todo);
+        todo.completed = true;
+      }
+    }
+
+
     return (
+      //det går att klicka på ett listitem, då anropar vi onclick
         <li className={className} onClick={handleClick}>
-          <span className="todo-list-item__checkbox"></span>
+          <input type="checkbox" className="todo-list-item__checkbox" id="checkbox" onChange={handleChange}></input>
           <div className="todo-list-item__info">
+            {/* hämtar title och description dynamiskt */}
             <h3>{todo.title}</h3>
             <p>{todo.description}</p>
           </div>

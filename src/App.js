@@ -18,6 +18,7 @@ function App() {
   //
   const [todo, setTodo] = useState([]);
   const [selectedTodo, setSelectedTodo] = useState();
+  const [completedTodo, setCompletedTodo] = useState();
   const [viewMode, setViewMode] = useState(viewModes.create);
 
   //När vi ska skapa en ny todo så sätter vi att ingen todo är markerad och att vyn som visas är create
@@ -32,6 +33,18 @@ function App() {
     //Sätter visningsläge till view
     setViewMode(viewModes.view);
   }
+
+  const completeTodo = (todo) => {
+    setCompletedTodo(todo);
+    setViewMode(viewModes.view);
+  }
+
+  /* const handleTodoCompleted = (completedTodo) => {
+    const newArray = [...todo, completedTodo];
+    setTodo(newArray);
+    completeTodo(completedTodo);
+    //completeTodo.complete = true;
+  } */
 
   const handleTodoSave = (newTodo) => {
     //Skapa en kopia av listan och lägger till det senast skapade objektet
@@ -89,6 +102,7 @@ function App() {
       case viewModes.view:
         return (
           <TodoDetails
+            //selected todo skickas ned hit
             todo={selectedTodo} 
             onDelete={handleTodoDeleted}
             onEdit={() => setViewMode(viewModes.edit)} />
@@ -117,10 +131,18 @@ function App() {
             onClick={showCreateForm}>
             Add</button>
         </h1>
+        {/* todo skickas ned hit */}
         <TodoList
+        // todo skickas in som props
           todo={todo}
+          //ser till att det kommer via props ner i todolist
           selectedTodo={selectedTodo}
-          onTodoSelected={selectTodo} />
+          completedTodo={completedTodo}
+          //när man klickar på en todo ska den sättas till selected
+          //händelse som triggas från todolist, när den blir selected uppdaterar vi state med selectedtodo
+          onTodoSelected={selectTodo} 
+          onTodoCompleted={completeTodo}
+          />
       </aside>
       <section>
         {renderMainSection()}

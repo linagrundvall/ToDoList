@@ -5,6 +5,7 @@ import todoService from "../api/todoApiService";
 
 
 const TodoDetails = (props) => {
+  //destructering på propsvariabeln, plockar ut från props
   const {todo, onEdit, onDelete} =props;
 
   const myDate = new Date(todo.created);
@@ -24,11 +25,13 @@ const TodoDetails = (props) => {
       onDelete(deleteTodo);
     }
   }
-
+    //
    const isInvalidDate = updatedDate === "Invalid Date";
+   //om 
     if(!isInvalidDate) {
        return (
         <div className="todo-details">
+          {/* skickar in dynamiskt */}
           <h2>{todo.title}</h2>
           <p>{todo.description}</p>
           <p className="todo-details__date">Created: {newDate}</p>
@@ -42,8 +45,8 @@ const TodoDetails = (props) => {
         </div>
     );
      }
+     //annars returnera detta (utan UpdatedDate)
     else {
-
     return (
         <div className="todo-details">
           <h2>{todo.title}</h2>
