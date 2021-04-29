@@ -8,26 +8,26 @@ const TodoDetails = (props) => {
   //destructering på propsvariabeln, plockar ut från props
   const {todo, onEdit, onDelete} =props;
 
+  //Skapar ett nytt datum för created och omvandlar den till en string
   const myDate = new Date(todo.created);
   const newDate = myDate.toLocaleString();
   
+  //Skapar ett nytt datum för updated och omvandlar den till en string
   const yourDate = new Date(todo.updated);
   const updatedDate = yourDate.toLocaleString();
   
- 
-
   const handleDelete = async () => {
-    //Stoppar koden tills du tryckt, synkront
+    //Synkron funktion som stoppar koden tills du tryckt
     const confirmationResult = window.confirm(`Do you really want to delete ${todo.title}?`);
     if(confirmationResult) {
-      //Ta bort
+      //Om du trycker på OK tas todon bort
       const deleteTodo = await todoService.deleteTodo(todo.id);
       onDelete(deleteTodo);
     }
   }
-    //
+    //Sätter en variabel för om datumet är invalid
    const isInvalidDate = updatedDate === "Invalid Date";
-   //om 
+   //Om datumet inte är invalid(dvs ok) så returneras detta (med UpdatedDate)
     if(!isInvalidDate) {
        return (
         <div className="todo-details">
@@ -45,7 +45,7 @@ const TodoDetails = (props) => {
         </div>
     );
      }
-     //annars returnera detta (utan UpdatedDate)
+     //Annars returneras detta (utan UpdatedDate)
     else {
     return (
         <div className="todo-details">

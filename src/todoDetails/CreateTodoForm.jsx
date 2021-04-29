@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import todoService from "../api/todoApiService";
 
-/* <!--Formulär för att skapa todo--> */
+//Formulär för att skapa todo
 
 const CreateTodoForm = (props) => {
   const {onCancel, onSave} = props;
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  //const [created, setCreated] = useState("");
   const isValid = title !== "";
 
   const handleSave = async () => {
@@ -17,9 +16,8 @@ const CreateTodoForm = (props) => {
       const newTodo = {
         title: title,
         description: description,
-        //created: created,
       };
-      //det vi får tillbaka från api:et
+      //Det vi får tillbaka från api:et
       const createdTodo = await todoService.createTodo(newTodo);
       //Rensa formuläret
       setTitle("");

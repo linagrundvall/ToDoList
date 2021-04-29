@@ -1,15 +1,5 @@
 import React from "react";
-
-/* { <!--Todo-objekt, markerat--> }
-<li className="todo-list-item todo-list-item--selected">
-<span className="todo-list-item__checkbox"></span>
-<div className="todo-list-item__info">
-  <h3>Todo (selected)</h3>
-  <p>Ham, sandwich, cheese</p>
-</div>
-</li>
-{*/
-  
+ 
 /*   //<!--Todo-objekt, slutfört--> }
 <li className="todo-list-item todo-list-item--completed">
 <span className="todo-list-item__checkbox todo-list-item__checkbox--completed">
@@ -30,17 +20,13 @@ import React from "react";
 </li> */
 
 
-
-
-/* Todo-objekt*/
 const TodoListItem = (props) => {
-    //destructering på propsvariabeln, plockar ut från props
-
+    //destructurering på propsvariabeln, plockar ut från props
     const {todo, isSelected, isCompleted, onClick, onChange} = props;
     
-    //let för att värdet kan ändras. 
+    //let för att värdet kan ändras
     let className = "todo-list-item";
-    //om den är markerad får den ett till klassnamn
+    //om todon är selected får den ett till klassnamn
     if (isSelected){
       className += " todo-list-item--selected";
     }
@@ -50,7 +36,7 @@ const TodoListItem = (props) => {
       className += " todo-list-item--completed";
     }
 
-    //hanterare. hantera onClick från todolist.
+    //hantera onClick från todolist.
     //om onClick finns så anropar vi onClick, tar emot todo
     const handleClick = () => {
       if(onClick) {
@@ -58,18 +44,25 @@ const TodoListItem = (props) => {
       }
     }
 
+    //hantera onChange från todolist.
+    //om onChange finns så anropar vi onChange, tar emot todo
     const handleChange = () => {
       if(onChange) {
         onChange(todo);
-        todo.completed = true;
       }
+      /* if(onChange && todo === isCompleted) {
+        className -= " todo-list-item--completed";
+      } */
     }
-
 
     return (
       //det går att klicka på ett listitem, då anropar vi onclick
         <li className={className} onClick={handleClick}>
-          <input type="checkbox" className="todo-list-item__checkbox" id="checkbox" onChange={handleChange}></input>
+          <input type="checkbox" 
+            className="todo-list-item__checkbox" 
+            /* det går att klicka på ett listitem, då anropar vi onChange */
+            onChange={handleChange}>
+          </input>
           <div className="todo-list-item__info">
             {/* hämtar title och description dynamiskt */}
             <h3>{todo.title}</h3>

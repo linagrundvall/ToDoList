@@ -151,6 +151,18 @@ h3 {
   margin-right: 16px;
 }
 
+/* .checkbox-rounded {
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid var(--input-borders);
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+} */
+
 .todo-list-item__checkbox--completed {
   background: var(--success);
   border: none;

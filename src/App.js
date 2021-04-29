@@ -15,46 +15,45 @@ const viewModes = {
 };
 
 function App() {
-  //
+  //Här sätter vi state
   const [todo, setTodo] = useState([]);
   const [selectedTodo, setSelectedTodo] = useState();
   const [completedTodo, setCompletedTodo] = useState();
   const [viewMode, setViewMode] = useState(viewModes.create);
 
-  //När vi ska skapa en ny todo så sätter vi att ingen todo är markerad och att vyn som visas är create
+  //Vi skapar en ny todo
   const showCreateForm = () => {
+    //Vyn som visas är create
     setViewMode(viewModes.create);
+    //Vi sätter vi att ingen todo är markerad
     setSelectedTodo(null);
   }
 
-  //Markerar en todo och visar todons detaljvyn
+  //Markerar en todo
   const selectTodo = (todo) => {
     setSelectedTodo(todo);
     //Sätter visningsläge till view
     setViewMode(viewModes.view);
   }
 
+  //Sätter en todo till completed
   const completeTodo = (todo) => {
     setCompletedTodo(todo);
+    //Sätter visningsläge till view
     setViewMode(viewModes.view);
   }
-
-  /* const handleTodoCompleted = (completedTodo) => {
-    const newArray = [...todo, completedTodo];
-    setTodo(newArray);
-    completeTodo(completedTodo);
-    //completeTodo.complete = true;
-  } */
 
   const handleTodoSave = (newTodo) => {
     //Skapa en kopia av listan och lägger till det senast skapade objektet
     const newArray = [...todo, newTodo];
-    //uppdaterar todo med en ny referens
+    //Uppdaterar todo med en ny referens
     setTodo(newArray);
+    //Sätter att den nya todon är markerad
     selectTodo(newTodo);
   };
 
   const handleTodoUpdate = (updatedTodo) => {
+    //Skapa en kopia av listan och uppdaterar innehållet
     const newArray = todo.slice();
     for(var i = 0; i < newArray.length; i++){
       if(newArray[i].id === updatedTodo.id){
@@ -62,6 +61,7 @@ function App() {
         break;
       }
     }
+    //
     setTodo(newArray);
     //markerar den uppdaterade todon
     selectTodo(updatedTodo);
@@ -72,7 +72,7 @@ function App() {
     setTodo(todo.filter(todo => todo.id !== deletedTodo.id));
     //Den ovan och getTodos gör samma sak, getTodos anropar API vilket kan påverka prestandan
     //getTodos();
-    //ändrar vyn till create
+    //Anropar en funktion som sätter vyn till create och avmarkerar alla todos
     showCreateForm();
 
   }
@@ -85,12 +85,13 @@ function App() {
 
   //Körs vid start, med tom beroendelista körs den bara en gång
   useEffect(() => {
+    //Hämtar alla todos
     getTodos();
   }, []);
 
   //Här renderar vi huvudsidan
   const renderMainSection = () => {
-    //Om vi inte har en vald todo eller createvyn så visar vi detta
+    //Om vi inte har en vald todo eller createvyn så visar vi formulär för att skapa en todo
     if(!selectedTodo || viewMode === viewModes.create){
       return (
         <CreateTodoForm
@@ -101,8 +102,9 @@ function App() {
     switch (viewMode) {
       case viewModes.view:
         return (
+          //
           <TodoDetails
-            //selected todo skickas ned hit
+            //Selected todo skickas hit
             todo={selectedTodo} 
             onDelete={handleTodoDeleted}
             onEdit={() => setViewMode(viewModes.edit)} />
@@ -110,6 +112,7 @@ function App() {
       case viewModes.edit:
         return (
           <EditTodoForm
+            ////Selected todo skickas hit
             todo={selectedTodo}
             onCancel={() => setViewMode(viewModes.view)}
             onSave={handleTodoUpdate} />
