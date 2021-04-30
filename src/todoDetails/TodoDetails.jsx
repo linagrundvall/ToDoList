@@ -15,6 +15,15 @@ const TodoDetails = (props) => {
   //Skapar ett nytt datum för updated och omvandlar den till en string
   const yourDate = new Date(todo.updated);
   const updatedDate = yourDate.toLocaleString();
+
+  /* const ifDateIsValid = () => {
+    const isInvalidDate = updatedDate === "Invalid Date";
+    if(!isInvalidDate) {
+      return (
+        updatedDate
+        );
+    };
+  };  */
   
   const handleDelete = async () => {
     //Synkron funktion som stoppar koden tills du tryckt
@@ -25,7 +34,8 @@ const TodoDetails = (props) => {
       onDelete(deleteTodo);
     }
   }
-    //Sätter en variabel för om datumet är invalid
+
+   //Sätter en variabel för om datumet är invalid
    const isInvalidDate = updatedDate === "Invalid Date";
    //Om datumet inte är invalid(dvs ok) så returneras detta (med UpdatedDate)
     if(!isInvalidDate) {
@@ -44,9 +54,10 @@ const TodoDetails = (props) => {
             onClick={onEdit}>Edit</button>
         </div>
     );
-     }
+    }
      //Annars returneras detta (utan UpdatedDate)
     else {
+
     return (
         <div className="todo-details">
           <h2>{todo.title}</h2>
@@ -60,7 +71,8 @@ const TodoDetails = (props) => {
             onClick={onEdit}>Edit</button>
         </div>
     );
-    };
+    }
+    
  };
 
 export default TodoDetails;

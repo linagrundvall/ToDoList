@@ -34,6 +34,8 @@ const TodoListItem = (props) => {
     //om den är completed får den ett till klassnamn
     if (isCompleted) {
       className += " todo-list-item--completed";
+      
+     
     }
 
     //hantera onClick från todolist.

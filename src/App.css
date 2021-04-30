@@ -191,3 +191,37 @@ h3 {
   opacity: 0.5;
   font-size: 0.8em;
 }
+
+.buttons-filter-todos {
+  color: rgb(0, 0, 0, 0.9);
+  background-color: lightblue;
+  padding: 10px 10px;
+  border-radius: 44px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  float: left;
+  display: inline-flex;
+  align-items: center;
+  outline: none;
+}
+
+.buttons-filter-todos:disabled {
+  opacity: 0.6;
+}
+
+.buttons-sort-todos {
+  color: rgb(0, 0, 0, 0.9);
+  background-color: purple;
+  padding: 10px 10px;
+  border-radius: 44px;
+  margin-right: 4px;
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  outline: none;
+  
+}
+
+.buttons-sort-todos:disabled {
+  opacity: 0.6;
+}

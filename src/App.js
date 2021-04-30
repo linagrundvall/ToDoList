@@ -37,11 +37,19 @@ function App() {
   }
 
   //Sätter en todo till completed
-  const completeTodo = (todo) => {
-    setCompletedTodo(todo);
+  const completeTodo = async (completedTodo) => {
+        
+    setCompletedTodo(completedTodo);
+    
+    completedTodo.completed = true;
+    //Anropar PUT från API:et för att uppdatera
+    const compTodo = await todoService.updateTodo(completedTodo.id, completedTodo);
+    
     //Sätter visningsläge till view
     setViewMode(viewModes.view);
   }
+
+  //const testArray;
 
   const handleTodoSave = (newTodo) => {
     //Skapa en kopia av listan och lägger till det senast skapade objektet
@@ -82,6 +90,87 @@ function App() {
     const todos = await todoService.getAll();
     setTodo(todos);
   }
+
+
+  //Listar alla todos
+  const showAllTodos = () => {
+    console.log("Hej Alla");
+    getTodos();
+  
+    showCreateForm();  
+  }
+
+  //Listar todos som inte är klara
+  const showNoneCompletedTodos = async () => {
+    console.log("Hej Not Completed");
+
+    const todos = await todoService.getAll();
+    console.log("Lina");
+   
+    let test = [];
+
+    for(var i = 0; i < todos.length; i++){
+      if(todos[i].completed === false){
+        test.push(todos[i]);
+        //todos[i] = completedTodo;
+      }
+    } 
+
+    setTodo(test);
+    
+
+    //setTodo(todo.filter(todo => todo.completed === false));
+    showCreateForm(); 
+  }
+
+  //let listCompleted = [];
+  
+
+  //Listar todos som är klara
+  const showCompletedTodos = async () => {
+    console.log("Hej Completed");
+    
+    const todos = await todoService.getAll();
+    console.log("Tobias");
+   
+    let test = [];
+
+    for(var i = 0; i < todos.length; i++){
+      if(todos[i].completed === true){
+        test.push(todos[i]);
+        //todos[i] = completedTodo;
+      }
+    } 
+
+    setTodo(test);
+
+    //setTodo(todo.filter(todo => todo.completed === true));
+    showCreateForm();
+  }
+
+
+
+
+
+  /* //Sortera på ålder
+  //Sort kommer att ändra ursprungslistan, och vi gör därför en kopia mha slice()
+  const sortByDate = todos.slice();
+
+  sortByDate.sort((todo, todo) => {
+    //ItemA är äldre än itemB, itemA ska läggas efter B
+    if (itemA.age > itemB.age) {
+      return 1;
+    } else {
+      //ItemA läggs före B
+      return -1;
+    }
+  }); 
+
+  //foreach
+  const newArray = todo.slice();
+    for(var i = 0; i < newArray.length; i++){
+      if(newArray[i].id === updatedTodo.id){
+        newArray[i] = updatedTodo;*/
 
   //Körs vid start, med tom beroendelista körs den bara en gång
   useEffect(() => {
@@ -134,6 +223,36 @@ function App() {
             onClick={showCreateForm}>
             Add</button>
         </h1>
+        <div>
+        <h4 className="buttons-filter-todos">
+          <button id="button-filter-none"
+          onClick={showAllTodos}>
+            Show all todos</button>
+        </h4>
+       
+        <h4 className="buttons-filter-todos">
+          <button id="button-filter-none-completed"
+            onClick={showNoneCompletedTodos}>
+            Show what to do</button>
+        </h4>
+        <h4 className="buttons-filter-todos">
+          <button id="button-filter-completed"
+            onClick={showCompletedTodos}>
+            Show completed</button>
+        </h4>
+        </div>
+
+        <div>
+        <h4 className="buttons-sort-todos">
+          <button id="button-sort-oldest-first">
+            Show oldest todos first</button>
+        </h4>
+        <h4 className="buttons-sort-todos">
+          <button id="button-sort-newest-first">
+            Show newest todos first</button>
+        </h4>
+        </div>
+        
         {/* todo skickas ned hit */}
         <TodoList
         // todo skickas in som props
@@ -146,6 +265,7 @@ function App() {
           onTodoSelected={selectTodo} 
           onTodoCompleted={completeTodo}
           />
+          
       </aside>
       <section>
         {renderMainSection()}

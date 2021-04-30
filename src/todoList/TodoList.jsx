@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import TodoListItem from "./TodoListItem";
 
 const TodoList = (props) => {
   //destructering på propsvariabeln, plockar ut från props
   const {todo, selectedTodo, completedTodo} = props;
+  //const [completed, setCompleted] = useState(todo.completed);
   
   const handleTodoClicked = (todo) => {
     if (props.onTodoSelected) {
@@ -12,12 +13,12 @@ const TodoList = (props) => {
     }
   };
 
-  const handleTodoChanged = (todo) => {
+   const handleTodoChanged = (todo) => {
     if(props.onTodoCompleted) {
       //anropas, detta är reaktionen på onChange, skickar med todon därifrån, som går upp till App och sätts till completedTodo
       props.onTodoCompleted(todo);
     }
-  };
+  }; 
 
     return (
     <ul className="todo-list">
@@ -28,6 +29,8 @@ const TodoList = (props) => {
         onClick={handleTodoClicked} 
         //när man klickar anropas handleTodoChanged
         onChange={handleTodoChanged}
+        //value={completed}
+        //onChange={(e) => setCompleted(e.target.value)}
         // unik nyckel för att react ska veta vilka objekt i listan som ska updateras och inte behöver uppdatera hela listan, ökar prestandan
         key={todo.id} 
         todo={todo} 
