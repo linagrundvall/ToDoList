@@ -227,19 +227,22 @@ function App() {
             Add</button>
         </h1>
         <div>
-        <h4 className="buttons-filter-todos">
+        <h4 className="buttons-filter-todos ">
           <button id="button-filter-none"
+          className="link-button"
           onClick={showAllTodos}>
             Show all todos</button>
         </h4>
        
         <h4 className="buttons-filter-todos">
           <button id="button-filter-none-completed"
+            className="link-button"
             onClick={showNoneCompletedTodos}>
             Show what to do</button>
         </h4>
         <h4 className="buttons-filter-todos">
           <button id="button-filter-completed"
+            className="link-button"
             onClick={showCompletedTodos}>
             Show completed</button>
         </h4>
@@ -248,11 +251,13 @@ function App() {
         <div>
         <h4 className="buttons-sort-todos">
           <button id="button-sort-oldest-first"
+          className="other-link-button"
           onClick={showOldestTodosFirst}>
             Show oldest todos first</button>
         </h4>
         <h4 className="buttons-sort-todos">
           <button id="button-sort-newest-first"
+          className="other-link-button"
           onClick={showNewestTodosFirst}>
             Show newest todos first</button>
         </h4>
