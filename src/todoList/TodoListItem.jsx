@@ -21,33 +21,31 @@ import React from "react";
 
 
 const TodoListItem = (props) => {
-    //destructurering på propsvariabeln, plockar ut från props
+    //Destructurering på propsvariabeln, plockar ut från props
     const {todo, isSelected, isCompleted, onClick, onChange} = props;
     
-    //let för att värdet kan ändras
+    //Let för att värdet kan ändras
     let className = "todo-list-item";
-    //om todon är selected får den ett till klassnamn
+    //Om todon är selected får den ett till klassnamn
     if (isSelected){
       className += " todo-list-item--selected";
     }
       
-    //om den är completed får den ett till klassnamn
+    //Om den är completed får den ett till klassnamn
     if (isCompleted) {
       className += " todo-list-item--completed";
-      
-     
     }
 
-    //hantera onClick från todolist.
-    //om onClick finns så anropar vi onClick, tar emot todo
+    //Hantera onClick från todolist.
+    //Om onClick finns så anropar vi onClick, tar emot todo
     const handleClick = () => {
       if(onClick) {
         onClick(todo);
       }
     }
 
-    //hantera onChange från todolist.
-    //om onChange finns så anropar vi onChange, tar emot todo
+    //Hantera onChange från todolist.
+    //Om onChange finns så anropar vi onChange, tar emot todo
     const handleChange = () => {
       if(onChange) {
         onChange(todo);
@@ -58,15 +56,15 @@ const TodoListItem = (props) => {
     }
 
     return (
-      //det går att klicka på ett listitem, då anropar vi onclick
+      //Det går att klicka på ett listitem, då anropar vi onclick
         <li className={className} onClick={handleClick}>
           <input type="checkbox" 
             className="todo-list-item__checkbox" 
-            /* det går att klicka på ett listitem, då anropar vi onChange */
+            /* Det går att klicka på ett listitem, då anropar vi onChange */
             onChange={handleChange}>
           </input>
           <div className="todo-list-item__info">
-            {/* hämtar title och description dynamiskt */}
+            {/* Hämtar title och description dynamiskt */}
             <h3>{todo.title}</h3>
             <p>{todo.description}</p>
           </div>

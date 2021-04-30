@@ -43,13 +43,12 @@ function App() {
     
     completedTodo.completed = true;
     //Anropar PUT från API:et för att uppdatera
-    const compTodo = await todoService.updateTodo(completedTodo.id, completedTodo);
+    await todoService.updateTodo(completedTodo.id, completedTodo);
     
     //Sätter visningsläge till view
     setViewMode(viewModes.view);
   }
 
-  //const testArray;
 
   const handleTodoSave = (newTodo) => {
     //Skapa en kopia av listan och lägger till det senast skapade objektet
@@ -71,12 +70,12 @@ function App() {
     }
     //
     setTodo(newArray);
-    //markerar den uppdaterade todon
+    //Markerar den uppdaterade todon
     selectTodo(updatedTodo);
   }
 
   const handleTodoDeleted = (deletedTodo) => {
-    //uppdaterar listan. filtrerar ut och visar alla todos förutom den todo som idmatchar den som tagits bort
+    //Uppdaterar listan. filtrerar ut och visar alla todos förutom den todo som idmatchar den som tagits bort
     setTodo(todo.filter(todo => todo.id !== deletedTodo.id));
     //Den ovan och getTodos gör samma sak, getTodos anropar API vilket kan påverka prestandan
     //getTodos();
@@ -88,6 +87,7 @@ function App() {
   //Vi hämtar alla todos via getAll på todoService och sparar i variabeln todos 
   const getTodos = async () => {
     const todos = await todoService.getAll();
+    //Uppdaterar todo med en ny referens
     setTodo(todos);
   }
 
@@ -96,7 +96,7 @@ function App() {
   const showAllTodos = () => {
     console.log("Hej Alla");
     getTodos();
-  
+    //Anropar en funktion som sätter vyn till create och avmarkerar alla todos
     showCreateForm();  
   }
 
@@ -105,7 +105,6 @@ function App() {
     console.log("Hej Not Completed");
 
     const todos = await todoService.getAll();
-    console.log("Lina");
    
     let test = [];
 
@@ -115,23 +114,18 @@ function App() {
         //todos[i] = completedTodo;
       }
     } 
-
+    //Uppdaterar todo med en ny referens
     setTodo(test);
-    
 
-    //setTodo(todo.filter(todo => todo.completed === false));
+    //Anropar en funktion som sätter vyn till create och avmarkerar alla todos
     showCreateForm(); 
   }
-
-  //let listCompleted = [];
-  
 
   //Listar todos som är klara
   const showCompletedTodos = async () => {
     console.log("Hej Completed");
     
     const todos = await todoService.getAll();
-    console.log("Tobias");
    
     let test = [];
 
@@ -141,36 +135,45 @@ function App() {
         //todos[i] = completedTodo;
       }
     } 
-
+    //Uppdaterar todo med en ny referens
     setTodo(test);
-
-    //setTodo(todo.filter(todo => todo.completed === true));
+    //Anropar en funktion som sätter vyn till create och avmarkerar alla todos
     showCreateForm();
   }
 
+  const showOldestTodosFirst = () => {
+    //Skapar en ny variabel som tilldelas en kopia av todo
+    const sortByDate = todo.slice();
+    //Här sorteras den nya listan efter created (som generellt är äldre än updated)
+    sortByDate.sort((itemA, itemB) => {
+      //ItemA är äldre än itemB, itemA ska läggas efter B
+      if (itemA.created > itemB.created) {
+        return 1;
+      } else {
+        //ItemA läggs före B
+        return -1;
+      }
+    }); 
+    //Uppdaterar todo med en ny referens
+    setTodo(sortByDate);
+  }
 
-
-
-
-  /* //Sortera på ålder
-  //Sort kommer att ändra ursprungslistan, och vi gör därför en kopia mha slice()
-  const sortByDate = todos.slice();
-
-  sortByDate.sort((todo, todo) => {
-    //ItemA är äldre än itemB, itemA ska läggas efter B
-    if (itemA.age > itemB.age) {
-      return 1;
-    } else {
-      //ItemA läggs före B
-      return -1;
-    }
-  }); 
-
-  //foreach
-  const newArray = todo.slice();
-    for(var i = 0; i < newArray.length; i++){
-      if(newArray[i].id === updatedTodo.id){
-        newArray[i] = updatedTodo;*/
+  const showNewestTodosFirst = () => {
+    //Skapar en ny variabel som tilldelas en kopia av todo
+    const sortByDate = todo.slice();
+    //Här sorteras den nya listan efter updated (som generellt är nyare än updated)
+    sortByDate.sort((itemA, itemB) => {
+      //ItemA är äldre än itemB, itemA ska läggas efter B
+      if (itemA.updated < itemB.updated) {
+        return 1;
+      } else {
+        //ItemA läggs före B
+        return -1;
+      }
+    }); 
+    //Uppdaterar todo med en ny referens
+    setTodo(sortByDate);
+  }
 
   //Körs vid start, med tom beroendelista körs den bara en gång
   useEffect(() => {
@@ -244,24 +247,26 @@ function App() {
 
         <div>
         <h4 className="buttons-sort-todos">
-          <button id="button-sort-oldest-first">
+          <button id="button-sort-oldest-first"
+          onClick={showOldestTodosFirst}>
             Show oldest todos first</button>
         </h4>
         <h4 className="buttons-sort-todos">
-          <button id="button-sort-newest-first">
+          <button id="button-sort-newest-first"
+          onClick={showNewestTodosFirst}>
             Show newest todos first</button>
         </h4>
         </div>
         
-        {/* todo skickas ned hit */}
+        {/*Todo skickas ned hit */}
         <TodoList
-        // todo skickas in som props
+        //Todo skickas in som props
           todo={todo}
-          //ser till att det kommer via props ner i todolist
+          //Ser till att det kommer via props ner i todolist
           selectedTodo={selectedTodo}
           completedTodo={completedTodo}
-          //när man klickar på en todo ska den sättas till selected
-          //händelse som triggas från todolist, när den blir selected uppdaterar vi state med selectedtodo
+          //När man klickar på en todo ska den sättas till selected
+          //Händelse som triggas från todolist, när den blir selected uppdaterar vi state med selectedtodo
           onTodoSelected={selectTodo} 
           onTodoCompleted={completeTodo}
           />

@@ -1,11 +1,11 @@
 import React from "react";
 import todoService from "../api/todoApiService";
 
-/* <!--Visningsläge för todo--> */
+//Visningsläge för todo
 
 
 const TodoDetails = (props) => {
-  //destructering på propsvariabeln, plockar ut från props
+  //Destructering på propsvariabeln, plockar ut från props
   const {todo, onEdit, onDelete} =props;
 
   //Skapar ett nytt datum för created och omvandlar den till en string
@@ -14,16 +14,11 @@ const TodoDetails = (props) => {
   
   //Skapar ett nytt datum för updated och omvandlar den till en string
   const yourDate = new Date(todo.updated);
-  const updatedDate = yourDate.toLocaleString();
+  let updatedDate = yourDate.toLocaleString();
 
-  /* const ifDateIsValid = () => {
-    const isInvalidDate = updatedDate === "Invalid Date";
-    if(!isInvalidDate) {
-      return (
-        updatedDate
-        );
-    };
-  };  */
+  if (updatedDate === "Invalid Date"){
+    updatedDate = newDate;
+  }
   
   const handleDelete = async () => {
     //Synkron funktion som stoppar koden tills du tryckt
@@ -34,44 +29,24 @@ const TodoDetails = (props) => {
       onDelete(deleteTodo);
     }
   }
-
-   //Sätter en variabel för om datumet är invalid
-   const isInvalidDate = updatedDate === "Invalid Date";
-   //Om datumet inte är invalid(dvs ok) så returneras detta (med UpdatedDate)
-    if(!isInvalidDate) {
-       return (
-        <div className="todo-details">
-          {/* skickar in dynamiskt */}
-          <h2>{todo.title}</h2>
-          <p>{todo.description}</p>
-          <p className="todo-details__date">Created: {newDate}</p>
-          <p className="todo-details__date">Updated: {updatedDate}</p>
-          <button type="button" 
-            className="link-button danger" 
-            onClick={handleDelete}>Delete</button>
-          <button type="button" 
-            className="link-button" 
-            onClick={onEdit}>Edit</button>
-        </div>
-    );
-    }
-     //Annars returneras detta (utan UpdatedDate)
-    else {
-
-    return (
-        <div className="todo-details">
-          <h2>{todo.title}</h2>
-          <p>{todo.description}</p>
-          <p className="todo-details__date">Created: {newDate}</p>
-          <button type="button" 
-            className="link-button danger" 
-            onClick={handleDelete}>Delete</button>
-          <button type="button" 
-            className="link-button" 
-            onClick={onEdit}>Edit</button>
-        </div>
-    );
-    }
+    
+  return (
+    <div className="todo-details">
+      {/* Skickar in dynamiskt */}
+      <h2>{todo.title}</h2>
+      <p>{todo.description}</p>
+      <p className="todo-details__date">Created: {newDate}</p>
+      <p className="todo-details__date">Updated: {updatedDate}</p>
+      <button type="button" 
+        className="link-button danger" 
+        onClick={handleDelete}>Delete</button>
+      <button type="button" 
+        className="link-button" 
+        onClick={onEdit}>Edit</button>
+    </div>
+  );
+    
+     
     
  };
 
