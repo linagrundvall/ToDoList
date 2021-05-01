@@ -22,18 +22,34 @@ const CreateTodoForm = (props) => {
         updated: updated,
       };
 
+      
+
       //Skapar ett nytt datum för created och omvandlar den till en string
-      const newDate = new Date(newTodo.created).toLocaleString();
-  
+      /* const newDate = new Date(newTodo.created);
       newTodo.created = newDate;
+      setCreated(newDate); */
+
+      const createdDate = new Date();
+      newTodo.created = createdDate;
+
+      //newTodo.updated = updatedDate;
+
+      setCreated(createdDate);
 
       //Skapar ett nytt datum för updated och omvandlar den till en string
-      const updatedDate = new Date(newTodo.updated).toLocaleString();
+      const updatedDate = new Date();
+      newTodo.updated = updatedDate;
 
-      newTodo.updated = newDate;
+      //newTodo.updated = updatedDate;
+
+      setUpdated(updatedDate);
      
       //Det vi får tillbaka från api:et
       const createdTodo = await todoService.createTodo(newTodo);
+      
+      createdTodo.created = createdDate.toLocaleString();
+      createdTodo.updated = updatedDate.toLocaleString();
+
       //Rensa formuläret
       setTitle("");
       setDescription("");

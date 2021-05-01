@@ -1,4 +1,6 @@
 import React from "react";
+import todoService from '../api/todoApiService';
+
  
 /*   //<!--Todo-objekt, slutfört--> }
 <li className="todo-list-item todo-list-item--completed">
@@ -30,11 +32,17 @@ const TodoListItem = (props) => {
     if (isSelected){
       className += " todo-list-item--selected";
     }
-      
-    //Om den är completed får den ett till klassnamn
-    if (isCompleted) {
+
+    if (isCompleted){
       className += " todo-list-item--completed";
     }
+      
+    /* const apiTodo = await todoService.getOne(todo.id);
+
+    //Om den är completed får den ett till klassnamn
+    if (apiTodo.completed === true) {
+      className += " todo-list-item--completed";
+    } */
 
     //Hantera onClick från todolist.
     //Om onClick finns så anropar vi onClick, tar emot todo

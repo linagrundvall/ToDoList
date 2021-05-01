@@ -21,12 +21,20 @@ const EditTodoForm = (props) => {
       // Om jag lägger till något här så kommer det finnas med i den uppdaterade todon
         updated: updated,
       };
-      //Skapar ett nytt datum för updated och omvandlar den till en string
-      const yourDate = new Date(todo.updated).toLocaleString();
+      
+      const updatedDate = new Date();
+      todo.updated = updatedDate;
+
+
+      setUpdated(updatedDate);
      
 
       //Anropar PUT från API:et för att uppdatera
       const updatedTodo = await todoService.updateTodo(todo.id, updatedTodoInfo);
+
+      updatedTodo.updated = updatedDate.toLocaleString();
+
+
       onSave(updatedTodo);
     }
   };

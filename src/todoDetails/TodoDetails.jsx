@@ -24,8 +24,7 @@ const TodoDetails = (props) => {
         updatedDate = todos.updated;
       }
     }  */
-    let newDate = todo.created.toLocaleString();
-    let updatedDate = todo.updated.toLocaleString();
+   
   
   const handleDelete = async () => {
     //Synkron funktion som stoppar koden tills du tryckt
@@ -42,8 +41,8 @@ const TodoDetails = (props) => {
       {/* Skickar in dynamiskt */}
       <h2>{todo.title}</h2>
       <p>{todo.description}</p>
-      <p className="todo-details__date">Created: {newDate}</p>
-      <p className="todo-details__date">Updated: {updatedDate}</p>
+      <p className="todo-details__date">Created: {todo.created}</p>
+      <p className="todo-details__date">Updated: {todo.updated}</p>
       <button type="button" 
         className="link-button danger" 
         onClick={handleDelete}>Delete</button>
