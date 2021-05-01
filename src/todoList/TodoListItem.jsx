@@ -33,7 +33,7 @@ const TodoListItem = (props) => {
       className += " todo-list-item--selected";
     }
 
-    if (isCompleted){
+    if (isCompleted || todo.completed === true){
       className += " todo-list-item--completed";
     }
       
@@ -55,6 +55,7 @@ const TodoListItem = (props) => {
     //Om onChange finns så anropar vi onChange, tar emot todo
     const handleChange = () => {
       if(onChange) {
+        todo.completed = true;
         onChange(todo);
       }
       /* if(onChange && todo === isCompleted) {

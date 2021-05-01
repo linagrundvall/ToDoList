@@ -50,11 +50,12 @@ function App() {
   }
 
 
-  const handleTodoSave = (newTodo) => {
+  const handleTodoSave = async (newTodo) => {
     //Skapa en kopia av listan och lägger till det senast skapade objektet
     const newArray = [...todo, newTodo];
     //Uppdaterar todo med en ny referens
     setTodo(newArray);
+    await todoService.updateTodo(newTodo.id, newTodo);
     //Sätter att den nya todon är markerad
     selectTodo(newTodo);
   };
@@ -87,6 +88,12 @@ function App() {
   //Vi hämtar alla todos via getAll på todoService och sparar i variabeln todos 
   const getTodos = async () => {
     const todos = await todoService.getAll();
+
+    for (var i = 0; i < todos.length; i++) {
+      
+      todos[i].created = new Date(todos[i].created).toLocaleString();
+      todos[i].updated = new Date(todos[i].updated).toLocaleString();
+    }
     //Uppdaterar todo med en ny referens
     setTodo(todos);
   }
@@ -96,6 +103,7 @@ function App() {
   const showAllTodos = () => {
     console.log("Hej Alla");
     getTodos();
+    
     //Anropar en funktion som sätter vyn till create och avmarkerar alla todos
     showCreateForm();  
   }
@@ -105,11 +113,13 @@ function App() {
     console.log("Hej Not Completed");
 
     const todos = await todoService.getAll();
+    //const todos = getTodos();
    
     let test = [];
 
     for(var i = 0; i < todos.length; i++){
       if(todos[i].completed === false){
+        todos[i].updated = new Date(todos[i].updated).toLocaleString();
         test.push(todos[i]);
         //todos[i] = completedTodo;
       }
@@ -126,11 +136,13 @@ function App() {
     console.log("Hej Completed");
     
     const todos = await todoService.getAll();
+    //const todos = getTodos();
    
     let test = [];
 
     for(var i = 0; i < todos.length; i++){
       if(todos[i].completed === true){
+        todos[i].updated = new Date(todos[i].updated).toLocaleString();
         test.push(todos[i]);
         //todos[i] = completedTodo;
       }
