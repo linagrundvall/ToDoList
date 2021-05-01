@@ -8,6 +8,8 @@ const CreateTodoForm = (props) => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [created, setCreated] = useState("");
+  const [updated, setUpdated] = useState("");
   const isValid = title !== "";
 
   const handleSave = async () => {
@@ -16,7 +18,20 @@ const CreateTodoForm = (props) => {
       const newTodo = {
         title: title,
         description: description,
+        created: created,
+        updated: updated,
       };
+
+      //Skapar ett nytt datum för created och omvandlar den till en string
+      const newDate = new Date(newTodo.created).toLocaleString();
+  
+      newTodo.created = newDate;
+
+      //Skapar ett nytt datum för updated och omvandlar den till en string
+      const updatedDate = new Date(newTodo.updated).toLocaleString();
+
+      newTodo.updated = newDate;
+     
       //Det vi får tillbaka från api:et
       const createdTodo = await todoService.createTodo(newTodo);
       //Rensa formuläret

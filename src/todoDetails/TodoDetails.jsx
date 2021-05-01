@@ -8,17 +8,24 @@ const TodoDetails = (props) => {
   //Destructering på propsvariabeln, plockar ut från props
   const {todo, onEdit, onDelete} =props;
 
-  //Skapar ett nytt datum för created och omvandlar den till en string
-  const myDate = new Date(todo.created);
-  const newDate = myDate.toLocaleString();
+  /* //Skapar ett nytt datum för created och omvandlar den till en string
+  const newDate = new Date(todo.created).toLocaleString();
   
   //Skapar ett nytt datum för updated och omvandlar den till en string
-  const yourDate = new Date(todo.updated);
-  let updatedDate = yourDate.toLocaleString();
+  const updatedDate = new Date(todo.updated).toLocaleString(); */
 
-  if (updatedDate === "Invalid Date"){
-    updatedDate = newDate;
-  }
+  /* const todos = await todoService.getAll();
+
+  let newDate = "0";
+  let updatedDate = "0";
+    for(var i = 0; i < todos.length; i++){
+      if(todos[i].id === todo.id){
+        newDate = todos.created;
+        updatedDate = todos.updated;
+      }
+    }  */
+    let newDate = todo.created.toLocaleString();
+    let updatedDate = todo.updated.toLocaleString();
   
   const handleDelete = async () => {
     //Synkron funktion som stoppar koden tills du tryckt
