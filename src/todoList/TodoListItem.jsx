@@ -38,7 +38,6 @@ const TodoListItem = (props) => {
     }
       
     /* const apiTodo = await todoService.getOne(todo.id);
-
     //Om den är completed får den ett till klassnamn
     if (apiTodo.completed === true) {
       className += " todo-list-item--completed";

@@ -12,9 +12,9 @@ const TodoList = (props) => {
     }
   };
 
-   const handleTodoChanged = (todo) => {
+   const handleCheckboxChanged = (todo) => {
     if(props.onTodoCompleted) {
-      //Anropas, detta är reaktionen på onChange, skickar med todon därifrån, som går upp till App och sätts till completedTodo
+      //Anropas, detta är reaktionen på onClick, skickar med todon därifrån, som går upp till App och sätts till completedTodo
       props.onTodoCompleted(todo);
     }
   }; 
@@ -27,7 +27,7 @@ const TodoList = (props) => {
         //När man klickar anropas handleTodoClicked
         onClick={handleTodoClicked} 
         //När man klickar anropas handleTodoChanged
-        onChange={handleTodoChanged}
+        onChange={handleCheckboxChanged}
         //value={completed}
         //onChange={(e) => setCompleted(e.target.value)}
         //Unik nyckel för att react ska veta vilka objekt i listan som ska updateras och inte behöver uppdatera hela listan, ökar prestandan
