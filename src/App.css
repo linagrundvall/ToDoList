@@ -146,7 +146,8 @@ h3 {
 }
 
 .todo-list-item--completed {
-  opacity: 0.7;
+  opacity: 0.5;
+  text-decoration-line: line-through;
 }
 
 .todo-list-item__checkbox {
